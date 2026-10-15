@@ -110,3 +110,32 @@ export const sampleTeamMembers: TeamMember[] = [
     }
   }
 ];
+
+export const sampleAlumniMembers: TeamMember[] = [
+  {
+    id: 'alumni-1',
+    name: 'Rajesh Srivastav',
+    role: 'Founding Organizer (2018-2021)',
+    department: 'Core',
+    bio: 'Co-founded GDG Ranchi in 2018. Now working as Staff Systems Architect in Bengaluru.',
+    photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=80',
+    skills: ['Community Vision', 'Android Architecture'],
+    socialLinks: {
+      linkedin: 'https://linkedin.com/in/example'
+    },
+    isAlumni: true
+  },
+  {
+    id: 'alumni-2',
+    name: 'Meenakshi Rao',
+    role: 'Former WTM Lead (2019-2022)',
+    department: 'Community',
+    bio: 'Spearheaded initial Women Techmakers initiatives in Jharkhand. Now Lead Engineer at CloudTech.',
+    photo: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=500&auto=format&fit=crop&q=80',
+    skills: ['WTM Leadership', 'Cloud Architecture'],
+    socialLinks: {
+      linkedin: 'https://linkedin.com/in/example'
+    },
+    isAlumni: true
+  }
+];

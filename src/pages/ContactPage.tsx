@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { ContactFormData } from '../types';
-import { Mail, MapPin, Send, AlertCircle, CheckCircle, Info, RefreshCw } from 'lucide-react';
+import {
+  Mail,
+  MapPin,
+  Send,
+  AlertCircle,
+  CheckCircle,
+  Info,
+  RefreshCw,
+  MessageSquare,
+  Mic,
+  Share2,
+  ExternalLink,
+  HelpCircle
+} from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -8,6 +21,7 @@ export const ContactPage: React.FC = () => {
     email: '',
     subject: '',
     category: 'General Inquiry',
+    organization: '',
     message: ''
   });
 
@@ -51,16 +65,15 @@ export const ContactPage: React.FC = () => {
     }
 
     setIsSubmitting(true);
-    // Simulate brief processing
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmittedData({ ...formData });
-      // Reset form fields
       setFormData({
         name: '',
         email: '',
         subject: '',
         category: 'General Inquiry',
+        organization: '',
         message: ''
       });
       setErrors({});
@@ -73,6 +86,7 @@ export const ContactPage: React.FC = () => {
       email: '',
       subject: '',
       category: 'General Inquiry',
+      organization: '',
       message: ''
     });
     setErrors({});
@@ -96,9 +110,9 @@ export const ContactPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 mt-8">
+      <div className="max-w-5xl mx-auto px-4 mt-8 space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Left Column: Contact Information Cards */}
+          {/* Left Column: Contact Information & Socials */}
           <div className="space-y-4">
             <div className="bg-[#fefce8] p-4 border-3 border-yellow-800 shadow-[3px_3px_0px_#854d0e]">
               <h3 className="text-base font-bold text-yellow-900 font-serif border-b border-yellow-300 pb-1 mb-2">
@@ -128,13 +142,68 @@ export const ContactPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Meetup Schedule Card */}
-            <div className="bg-[#eff6ff] p-4 border-2 border-blue-800 shadow-[3px_3px_0px_#1e40af]">
-              <h3 className="text-sm font-bold text-blue-900 font-serif mb-1">
-                📅 Meetup Timing
-              </h3>
-              <p className="text-xs text-gray-700 leading-relaxed">
-                Regular meetups occur on the <strong>2nd or 3rd Saturday</strong> of each month. Exact venues are confirmed 2 weeks in advance.
+            {/* Social Communities Hub */}
+            <div className="bg-[#eff6ff] p-4 border-2 border-blue-800 shadow-[3px_3px_0px_#1e40af] space-y-2">
+              <div className="flex items-center gap-1.5 text-blue-900 font-bold font-mono text-xs uppercase">
+                <Share2 className="w-4 h-4 text-blue-700" />
+                <span>Join Online Channels</span>
+              </div>
+              <ul className="space-y-1.5 text-xs text-blue-950 font-mono">
+                <li>
+                  <a
+                    href="https://discord.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between hover:underline text-indigo-700"
+                  >
+                    <span>💬 Community Discord</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between hover:underline text-sky-600"
+                  >
+                    <span>🐦 Twitter / X Updates</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between hover:underline text-blue-700"
+                  >
+                    <span>💼 LinkedIn Company Page</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between hover:underline text-gray-900"
+                  >
+                    <span>💻 GitHub Open Source</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Call for Speakers Guidelines Box */}
+            <div className="bg-[#ecfdf5] border-2 border-emerald-600 p-3 text-xs text-emerald-950 space-y-1">
+              <div className="font-bold flex items-center gap-1 font-mono text-emerald-900">
+                <Mic className="w-4 h-4 text-emerald-700" />
+                <span>Speaking at GDG Ranchi:</span>
+              </div>
+              <p className="text-[11px] leading-relaxed text-emerald-800">
+                Talks can range from 20-minute lightning talks to 45-minute deep-dives or 90-minute CodeLabs. We support first-time speakers with slide reviews and rehearsal sessions!
               </p>
             </div>
 
@@ -145,12 +214,12 @@ export const ContactPage: React.FC = () => {
                 <span>Challenge Starter Note:</span>
               </div>
               <p className="mt-1 text-[11px] leading-relaxed text-red-800">
-                This form validates user inputs on the client side. Submissions will display a demonstration confirmation banner without sending real emails.
+                This form validates user inputs on the client side. Submissions display a demonstration confirmation banner without sending real emails.
               </p>
             </div>
           </div>
 
-          {/* Right Column: Contact Form with Inconsistent, Outdated Elements */}
+          {/* Right Column: Contact Form */}
           <div className="md:col-span-2">
             <div className="bg-white p-6 border-3 border-black shadow-[5px_5px_0px_#000]">
               <h2 className="text-xl font-black font-serif text-gray-900 mb-1 border-b-2 border-black pb-2">
@@ -228,6 +297,20 @@ export const ContactPage: React.FC = () => {
                       <AlertCircle className="w-3 h-3" /> {errors.email}
                     </div>
                   )}
+                </div>
+
+                {/* College or Company */}
+                <div>
+                  <label className="block font-bold text-gray-800 uppercase font-mono mb-1">
+                    College / Organization (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.organization}
+                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                    placeholder="e.g. BIT Mesra / Ranchi University / Infosys"
+                    className="w-full p-2 border-2 border-black text-xs bg-white"
+                  />
                 </div>
 
                 {/* Topic / Category */}

@@ -35,6 +35,7 @@ export interface TeamMember {
     github?: string;
   };
   skills: string[];
+  isAlumni?: boolean;
 }
 
 export interface ContactFormData {
@@ -43,4 +44,46 @@ export interface ContactFormData {
   subject: string;
   category: string;
   message: string;
+  organization?: string;
+}
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  companyOrCollege: string;
+  comment: string;
+  rating: number;
+  avatar: string;
+}
+
+export interface Sponsor {
+  id: string;
+  name: string;
+  category: 'Global' | 'Community' | 'Venue' | 'Ecosystem';
+  logoText: string;
+  description: string;
+  website: string;
+}
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  category: 'General' | 'Events' | 'Speaking' | 'Swags';
+}
+
+export interface TimelineMilestone {
+  year: string;
+  title: string;
+  description: string;
+  badge: string;
+}
+
+export interface GalleryPhoto {
+  id: string;
+  title: string;
+  caption: string;
+  imageUrl: string;
+  eventName: string;
 }

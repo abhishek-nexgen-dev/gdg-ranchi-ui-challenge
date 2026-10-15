@@ -47,6 +47,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/gallery" className="text-blue-300 hover:text-white underline">
+                  &gt; Photo Gallery &amp; Memories
+                </Link>
+              </li>
+              <li>
                 <Link to="/team" className="text-blue-300 hover:text-white underline">
                   &gt; Community Organizers
                 </Link>

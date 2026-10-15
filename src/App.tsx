@@ -7,6 +7,7 @@ import { AboutPage } from './pages/AboutPage';
 import { TeamPage } from './pages/TeamPage';
 import { EventsPage } from './pages/EventsPage';
 import { ContactPage } from './pages/ContactPage';
+import { GalleryPage } from './pages/GalleryPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 /**
@@ -37,6 +38,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/team" element={<TeamPage />} />
             <Route path="/events" element={<EventsPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

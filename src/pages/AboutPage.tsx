@@ -1,15 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Target, Eye, Globe, Terminal, Cpu, Smartphone, Layers, HelpCircle, CheckCircle } from 'lucide-react';
+import { sampleTimeline, samplePartnerCampuses } from '../data/communityData';
+import {
+  Target,
+  Eye,
+  Globe,
+  Terminal,
+  Cpu,
+  Smartphone,
+  Layers,
+  HelpCircle,
+  CheckCircle,
+  ShieldCheck,
+  GraduationCap,
+  Sparkles,
+  Heart
+} from 'lucide-react';
 
 export const AboutPage: React.FC = () => {
   return (
     <div className="w-full bg-[#f8fafc] text-gray-800 font-sans pb-12">
-      {/* Page Header Banner - Inconsistent typography and styling */}
+      {/* Page Header Banner */}
       <div className="bg-[#1e293b] text-white py-8 px-4 border-b-4 border-yellow-400 text-center">
         <div className="max-w-4xl mx-auto space-y-2">
           <div className="inline-block bg-yellow-400 text-black px-2 py-0.5 text-xs font-mono font-bold uppercase tracking-wider">
-            CHAPTER HISTORY &amp; CHARTER
+            CHAPTER CHARTER &amp; HISTORY
           </div>
           <h1 className="text-3xl md:text-4xl font-black font-serif text-yellow-300">
             About Google Developer Group (GDG) Ranchi
@@ -21,7 +36,7 @@ export const AboutPage: React.FC = () => {
       </div>
 
       <div className="max-w-5xl mx-auto px-4 mt-8 space-y-8">
-        {/* Section 1: Introduction - Cluttered box style */}
+        {/* Section 1: Introduction */}
         <section className="bg-white p-6 border-2 border-black shadow-[4px_4px_0px_#000]">
           <div className="flex items-center gap-2 border-b-2 border-red-600 pb-2 mb-3">
             <Globe className="w-5 h-5 text-red-600 shrink-0" />
@@ -42,9 +57,8 @@ export const AboutPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Section 2: Mission and Vision - Clashing colored boxes */}
+        {/* Section 2: Mission and Vision */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Mission */}
           <div className="bg-[#eff6ff] p-5 border-3 border-blue-800 shadow-[3px_3px_0px_#1e40af]">
             <div className="flex items-center gap-2 mb-2 text-blue-900 font-mono font-bold">
               <Target className="w-5 h-5 text-blue-700" />
@@ -60,7 +74,6 @@ export const AboutPage: React.FC = () => {
             </ul>
           </div>
 
-          {/* Vision */}
           <div className="bg-[#fdf2f8] p-5 border-3 border-pink-800 shadow-[3px_3px_0px_#9d174d]">
             <div className="flex items-center gap-2 mb-2 text-pink-900 font-mono font-bold">
               <Eye className="w-5 h-5 text-pink-700" />
@@ -77,7 +90,69 @@ export const AboutPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Section 3: Learning Tracks & Collaboration Activities */}
+        {/* Section 3: Chapter Timeline / Journey */}
+        <section className="bg-white p-6 border-2 border-black shadow-[4px_4px_0px_#000]">
+          <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
+            <h2 className="text-xl md:text-2xl font-black font-serif text-gray-900">
+              📜 GDG Ranchi Journey &amp; Milestones (2018 - 2026)
+            </h2>
+            <span className="text-xs font-mono bg-yellow-400 text-black px-2 py-0.5 font-bold uppercase">
+              CHAPTER CHRONICLE
+            </span>
+          </div>
+
+          <div className="space-y-4">
+            {sampleTimeline.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col sm:flex-row items-start gap-3 p-3 bg-[#f8fafc] border border-gray-400"
+              >
+                <div className="w-24 shrink-0 font-mono font-bold text-sm bg-[#1e293b] text-yellow-300 px-2 py-1 text-center border border-black">
+                  {item.year}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-bold text-sm text-gray-900 font-serif">
+                      {item.title}
+                    </h4>
+                    <span className="text-[10px] bg-red-100 text-red-800 font-mono px-1.5 py-0.2 border border-red-300">
+                      {item.badge}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-700 mt-1 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Section 4: Women Techmakers (WTM) Spotlight */}
+        <section className="bg-gradient-to-r from-[#831843] to-[#be185d] text-white p-6 border-4 border-yellow-300 shadow-[5px_5px_0px_#000] space-y-3">
+          <div className="flex items-center gap-2">
+            <Heart className="w-6 h-6 text-pink-300 fill-pink-300" />
+            <h2 className="text-xl md:text-2xl font-black font-serif">
+              Women Techmakers (WTM) Ranchi Chapter
+            </h2>
+          </div>
+          <p className="text-xs md:text-sm text-pink-100 leading-relaxed font-sans">
+            Google’s Women Techmakers program provides visibility, community, and resources for women in technology. WTM Ranchi organizes dedicated mentorship programs, panel talks with female engineering leaders, and the annual International Women's Day (IWD) summit.
+          </p>
+          <div className="bg-black/30 p-3 border border-pink-300 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <span>
+              ★ All tech meetups are open to everyone, with special diversity scholarships and speaker tracks for women in tech.
+            </span>
+            <Link
+              to="/team"
+              className="bg-yellow-400 text-black font-black uppercase text-xs px-3 py-1.5 border border-black hover:bg-yellow-300"
+            >
+              Meet WTM Ambassadors &gt;
+            </Link>
+          </div>
+        </section>
+
+        {/* Section 5: Learning Tracks */}
         <section className="bg-[#f1f5f9] p-6 border-2 border-gray-400">
           <div className="text-center mb-6">
             <span className="text-xs font-mono font-bold uppercase text-purple-700 bg-purple-100 px-2 py-0.5 border border-purple-300">
@@ -86,13 +161,9 @@ export const AboutPage: React.FC = () => {
             <h2 className="text-2xl font-black font-serif text-gray-900 mt-1">
               Technology Tracks Covered at GDG Ranchi
             </h2>
-            <p className="text-xs text-gray-600 mt-1 font-sans">
-              We host hands-on labs and expert-led tech talks covering diverse technical domains:
-            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {/* Track 1 */}
             <div className="bg-white p-4 border border-gray-400 shadow-xs">
               <div className="flex items-center gap-2 text-blue-600 font-bold text-sm mb-1 font-mono">
                 <Cpu className="w-4 h-4 text-blue-600" />
@@ -103,7 +174,6 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Track 2 */}
             <div className="bg-white p-4 border border-gray-400 shadow-xs">
               <div className="flex items-center gap-2 text-emerald-600 font-bold text-sm mb-1 font-mono">
                 <Layers className="w-4 h-4 text-emerald-600" />
@@ -114,7 +184,6 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Track 3 */}
             <div className="bg-white p-4 border border-gray-400 shadow-xs">
               <div className="flex items-center gap-2 text-sky-600 font-bold text-sm mb-1 font-mono">
                 <Smartphone className="w-4 h-4 text-sky-600" />
@@ -125,7 +194,6 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Track 4 */}
             <div className="bg-white p-4 border border-gray-400 shadow-xs">
               <div className="flex items-center gap-2 text-green-700 font-bold text-sm mb-1 font-mono">
                 <Terminal className="w-4 h-4 text-green-700" />
@@ -136,7 +204,6 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Track 5 */}
             <div className="bg-white p-4 border border-gray-400 shadow-xs">
               <div className="flex items-center gap-2 text-orange-600 font-bold text-sm mb-1 font-mono">
                 <Globe className="w-4 h-4 text-orange-600" />
@@ -147,7 +214,6 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Track 6 */}
             <div className="bg-white p-4 border border-gray-400 shadow-xs">
               <div className="flex items-center gap-2 text-purple-700 font-bold text-sm mb-1 font-mono">
                 <HelpCircle className="w-4 h-4 text-purple-700" />
@@ -160,53 +226,61 @@ export const AboutPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Section 4: Why Participate in GDG Ranchi */}
-        <section className="bg-[#fffbeb] p-6 border-3 border-yellow-700 shadow-[4px_4px_0px_#854d0e]">
-          <h2 className="text-xl md:text-2xl font-black font-serif text-yellow-950 mb-3">
-            Why Should You Participate in Our Community?
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm text-gray-800">
-            <div className="bg-white p-3 border border-yellow-300 flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-              <div>
-                <strong>Zero Membership Fees:</strong> All GDG Ranchi events, workshops, and study materials are 100% free of cost.
-              </div>
-            </div>
-            <div className="bg-white p-3 border border-yellow-300 flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-              <div>
-                <strong>Direct Hands-On Coding:</strong> We emphasize interactive CodeLabs over long lectures. Bring your laptop and code!
-              </div>
-            </div>
-            <div className="bg-white p-3 border border-yellow-300 flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-              <div>
-                <strong>Speaker Opportunities:</strong> First-time speakers are warmly encouraged with guidance from senior community mentors.
-              </div>
-            </div>
-            <div className="bg-white p-3 border border-yellow-300 flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-              <div>
-                <strong>Official Google Swags:</strong> T-shirts, stickers, notebooks, and digital certificates for active participants.
-              </div>
-            </div>
+        {/* Section 6: Campus Outreach & University Partners */}
+        <section className="bg-white p-6 border-2 border-black shadow-[4px_4px_0px_#000]">
+          <div className="flex items-center gap-2 border-b-2 border-blue-600 pb-2 mb-3">
+            <GraduationCap className="w-5 h-5 text-blue-600 shrink-0" />
+            <h2 className="text-xl md:text-2xl font-black font-serif text-gray-900">
+              Campus Outreach Network (Colleges in Ranchi)
+            </h2>
           </div>
+          <p className="text-xs md:text-sm text-gray-700 leading-relaxed mb-4">
+            We partner actively with student developer clubs (GDSC / campus clubs) across premier universities in Ranchi to host hackathons, study jams, and campus tech festivals:
+          </p>
 
-          <div className="mt-5 text-center flex flex-wrap justify-center gap-3">
-            <Link
-              to="/events"
-              className="bg-green-700 hover:bg-green-800 text-white font-bold text-xs uppercase px-4 py-2 border-2 border-black"
-            >
-              Check Out Upcoming Events &gt;
-            </Link>
-            <Link
-              to="/team"
-              className="bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs uppercase px-4 py-2 border-2 border-black"
-            >
-              Meet Our Organizers &gt;
-            </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {samplePartnerCampuses.map((campus, idx) => (
+              <div
+                key={idx}
+                className="bg-[#f8fafc] p-3 border border-gray-400 text-xs space-y-1"
+              >
+                <div className="font-bold text-gray-900 font-sans">{campus.name}</div>
+                <div className="text-[11px] text-gray-600 font-mono">
+                  {campus.type} • {campus.city}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
+
+        {/* Section 7: Community Code of Conduct */}
+        <section className="bg-[#fff7ed] p-6 border-3 border-orange-600 shadow-[4px_4px_0px_#c2410c]">
+          <div className="flex items-center gap-2 mb-2 text-orange-950 font-bold">
+            <ShieldCheck className="w-5 h-5 text-orange-700" />
+            <h2 className="text-lg md:text-xl font-black font-serif">
+              GDG Ranchi Code of Conduct &amp; Community Values
+            </h2>
+          </div>
+          <p className="text-xs text-gray-700 leading-relaxed font-sans mb-3">
+            GDG Ranchi is dedicated to providing a harassment-free and welcoming event experience for everyone, regardless of gender, sexual orientation, disability, physical appearance, race, ethnicity, or religion.
+          </p>
+          <ul className="space-y-1.5 text-xs text-orange-950 font-mono">
+            <li>• Be respectful and inclusive of differing viewpoints and experiences.</li>
+            <li>• Gracefully accept constructive criticism.</li>
+            <li>• Focus on what is best for the overall developer community.</li>
+            <li>• Zero tolerance for harassment or inappropriate conduct at our venues or online channels.</li>
+          </ul>
+        </section>
+
+        {/* Final CTA */}
+        <div className="text-center pt-4">
+          <Link
+            to="/events"
+            className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-black uppercase text-xs px-6 py-3 border-2 border-black shadow-[3px_3px_0px_#000]"
+          >
+            Check Out Upcoming Events &gt;&gt;
+          </Link>
+        </div>
       </div>
     </div>
   );

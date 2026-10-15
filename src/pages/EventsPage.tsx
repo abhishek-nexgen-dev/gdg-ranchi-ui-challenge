@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { sampleEvents } from '../data/events';
-import { EventItem, EventCategory, EventStatus } from '../types';
+import { EventItem, EventCategory, EventStatus, EventMode } from '../types';
 import { EventCard } from '../components/EventCard';
 import { EventModal } from '../components/EventModal';
-import { Calendar, Search, Filter, AlertCircle } from 'lucide-react';
+import {
+  Calendar,
+  Search,
+  Filter,
+  AlertCircle,
+  MapPin,
+  Laptop,
+  CheckCircle2,
+  Building,
+  Navigation
+} from 'lucide-react';
 
 export const EventsPage: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
   const [statusFilter, setStatusFilter] = useState<'all' | EventStatus>('all');
   const [categoryFilter, setCategoryFilter] = useState<'all' | EventCategory>('all');
+  const [modeFilter, setModeFilter] = useState<'all' | EventMode>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories: ('all' | EventCategory)[] = [
@@ -21,17 +32,18 @@ export const EventsPage: React.FC = () => {
     'General'
   ];
 
-  // Filter events based on status, category, and search query
+  // Filter events based on status, category, mode, and search query
   const filteredEvents = sampleEvents.filter((event) => {
     const matchesStatus = statusFilter === 'all' || event.status === statusFilter;
     const matchesCategory = categoryFilter === 'all' || event.category === categoryFilter;
+    const matchesMode = modeFilter === 'all' || event.mode === modeFilter;
     const matchesSearch =
       searchQuery === '' ||
       event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       event.location.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return matchesStatus && matchesCategory && matchesSearch;
+    return matchesStatus && matchesCategory && matchesMode && matchesSearch;
   });
 
   const upcomingCount = sampleEvents.filter((e) => e.status === 'upcoming').length;
@@ -67,7 +79,7 @@ export const EventsPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {/* Status Tabs */}
             <div className="space-y-1">
               <label className="text-[11px] font-bold text-gray-600 uppercase font-mono block">
@@ -76,7 +88,7 @@ export const EventsPage: React.FC = () => {
               <div className="flex gap-1">
                 <button
                   onClick={() => setStatusFilter('all')}
-                  className={`text-xs px-2.5 py-1.5 font-bold uppercase border-2 flex-1 ${
+                  className={`text-xs px-2 py-1.5 font-bold uppercase border-2 flex-1 ${
                     statusFilter === 'all'
                       ? 'bg-yellow-400 text-black border-black font-black'
                       : 'bg-gray-100 text-gray-700 border-gray-300'
@@ -86,7 +98,7 @@ export const EventsPage: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setStatusFilter('upcoming')}
-                  className={`text-xs px-2.5 py-1.5 font-bold uppercase border-2 flex-1 ${
+                  className={`text-xs px-2 py-1.5 font-bold uppercase border-2 flex-1 ${
                     statusFilter === 'upcoming'
                       ? 'bg-green-600 text-white border-black font-black'
                       : 'bg-gray-100 text-gray-700 border-gray-300'
@@ -96,7 +108,7 @@ export const EventsPage: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setStatusFilter('past')}
-                  className={`text-xs px-2.5 py-1.5 font-bold uppercase border-2 flex-1 ${
+                  className={`text-xs px-2 py-1.5 font-bold uppercase border-2 flex-1 ${
                     statusFilter === 'past'
                       ? 'bg-blue-800 text-white border-black font-black'
                       : 'bg-gray-100 text-gray-700 border-gray-300'
@@ -110,7 +122,7 @@ export const EventsPage: React.FC = () => {
             {/* Category Select */}
             <div className="space-y-1">
               <label className="text-[11px] font-bold text-gray-600 uppercase font-mono block">
-                Filter By Technology:
+                Technology Track:
               </label>
               <select
                 value={categoryFilter}
@@ -122,6 +134,22 @@ export const EventsPage: React.FC = () => {
                     {cat === 'all' ? 'All Tech Tracks' : cat}
                   </option>
                 ))}
+              </select>
+            </div>
+
+            {/* Mode Select */}
+            <div className="space-y-1">
+              <label className="text-[11px] font-bold text-gray-600 uppercase font-mono block">
+                Delivery Format:
+              </label>
+              <select
+                value={modeFilter}
+                onChange={(e) => setModeFilter(e.target.value as 'all' | EventMode)}
+                className="w-full text-xs font-bold border-2 border-black p-1.5 bg-yellow-50 text-gray-900"
+              >
+                <option value="all">All Formats (In-Person / Online)</option>
+                <option value="In-Person">In-Person Only</option>
+                <option value="Online">Online / Virtual Only</option>
               </select>
             </div>
 
@@ -171,6 +199,7 @@ export const EventsPage: React.FC = () => {
               onClick={() => {
                 setStatusFilter('all');
                 setCategoryFilter('all');
+                setModeFilter('all');
                 setSearchQuery('');
               }}
               className="bg-yellow-400 text-black text-xs font-bold uppercase px-4 py-2 border-2 border-black"
@@ -190,6 +219,99 @@ export const EventsPage: React.FC = () => {
             ))}
           </div>
         )}
+
+        {/* What to Bring Checklist Section */}
+        <div className="bg-[#fffbeb] p-5 border-3 border-yellow-700 shadow-[4px_4px_0px_#854d0e] space-y-3">
+          <div className="flex items-center gap-2 font-mono text-yellow-900 font-bold uppercase text-sm border-b border-yellow-300 pb-1">
+            <Laptop className="w-4 h-4 text-yellow-800" />
+            <span>CodeLab Attendee Checklist — What to Bring to Meetups</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs text-gray-700">
+            <div className="bg-white p-2.5 border border-yellow-400 flex items-start gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+              <div>
+                <strong>Laptop &amp; Charger:</strong> Required for hands-on sessions &amp; study jams.
+              </div>
+            </div>
+            <div className="bg-white p-2.5 border border-yellow-400 flex items-start gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+              <div>
+                <strong>Student / Photo ID:</strong> For campus security verification at entry gates.
+              </div>
+            </div>
+            <div className="bg-white p-2.5 border border-yellow-400 flex items-start gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+              <div>
+                <strong>Google Account:</strong> Used to access Google Cloud Skills Boost labs.
+              </div>
+            </div>
+            <div className="bg-white p-2.5 border border-yellow-400 flex items-start gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+              <div>
+                <strong>Curiosity &amp; Energy:</strong> Ready to network, code, and win swags!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Venue & Navigation Guide for Ranchi */}
+        <div className="bg-white p-6 border-2 border-black shadow-[4px_4px_0px_#000] space-y-4">
+          <div className="flex items-center gap-2 border-b-2 border-black pb-2">
+            <Navigation className="w-5 h-5 text-blue-700 shrink-0" />
+            <h2 className="text-xl font-black font-serif text-gray-900">
+              Ranchi Venue Navigation &amp; Transit Guide
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div className="bg-[#f8fafc] p-3 border border-gray-400 space-y-1">
+              <div className="font-bold text-gray-900 flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-red-600" /> Aryabhatta Auditorium
+              </div>
+              <p className="text-gray-600">
+                Ranchi University Morabadi Campus. 4.5 km from Ranchi Railway Station. Ample two-wheeler and four-wheeler parking available.
+              </p>
+            </div>
+
+            <div className="bg-[#f8fafc] p-3 border border-gray-400 space-y-1">
+              <div className="font-bold text-gray-900 flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-red-600" /> St. Xavier's Auditorium
+              </div>
+              <p className="text-gray-600">
+                Dr. Camil Bulcke Path (Purulia Road). Central location near Albert Ekka Chowk with direct auto-rickshaw connectivity.
+              </p>
+            </div>
+
+            <div className="bg-[#f8fafc] p-3 border border-gray-400 space-y-1">
+              <div className="font-bold text-gray-900 flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-red-600" /> BIT Mesra Seminar Halls
+              </div>
+              <p className="text-gray-600">
+                Lalpur Extension Center &amp; Main Mesra Campus. Shuttle and bus services available from Kantatoli bus stand.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Host an Event Callout */}
+        <div className="bg-[#1e1b4b] text-yellow-300 p-5 border-4 border-yellow-400 text-center space-y-2">
+          <div className="flex justify-center">
+            <Building className="w-5 h-5 text-yellow-400" />
+          </div>
+          <h3 className="text-lg font-bold font-serif">
+            Want to Host a GDG Ranchi Meetup at your College or Co-Working Space?
+          </h3>
+          <p className="text-xs text-gray-300 max-w-xl mx-auto">
+            We partner with academic institutions and corporate offices to bring technical workshops and speaker panels to diverse locations across Ranchi.
+          </p>
+          <div className="pt-1">
+            <a
+              href="/contact"
+              className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-black uppercase text-xs px-4 py-2 border-2 border-black"
+            >
+              Propose Your Venue &gt;
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Event Details Modal */}

@@ -97,6 +97,19 @@ export const Navbar: React.FC = () => {
           </NavLink>
 
           <NavLink
+            to="/gallery"
+            className={({ isActive }) =>
+              `px-3 py-1.5 uppercase transition-all ${
+                isActive
+                  ? 'bg-orange-500 text-white font-black border-2 border-white'
+                  : 'text-orange-300 hover:text-yellow-200'
+              }`
+            }
+          >
+            Memories
+          </NavLink>
+
+          <NavLink
             to="/team"
             className={({ isActive }) =>
               `px-3 py-1.5 uppercase transition-all ${
@@ -193,6 +206,17 @@ export const Navbar: React.FC = () => {
             }
           >
             📅 Community Events (Upcoming & Past)
+          </NavLink>
+          <NavLink
+            to="/gallery"
+            onClick={closeMobileMenu}
+            className={({ isActive }) =>
+              `block px-3 py-2 text-sm font-bold uppercase border ${
+                isActive ? 'bg-orange-500 text-white border-black font-black' : 'text-white border-gray-700 hover:bg-gray-800'
+              }`
+            }
+          >
+            📷 Photo Archive &amp; Memories
           </NavLink>
           <NavLink
             to="/team"
