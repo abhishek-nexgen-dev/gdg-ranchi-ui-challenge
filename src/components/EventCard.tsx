@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { EventItem } from '../types';
 import { Calendar, Clock, MapPin, Users, ArrowRight } from 'lucide-react';
 
@@ -63,9 +64,11 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect, index = 0
           </div>
         </div>
 
-        {/* Title - Outdated font & sizing */}
+        {/* Title - Outdated font & sizing with link to single event page */}
         <h3 className="text-lg md:text-xl font-black text-[#1e1b4b] font-serif leading-snug mb-2 hover:text-blue-700">
-          {event.title}
+          <Link to={`/events/${event.id}`} className="hover:underline">
+            {event.title}
+          </Link>
         </h3>
 
         {/* Info Grid with awkward borders */}
@@ -96,18 +99,27 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect, index = 0
         </p>
       </div>
 
-      {/* Button with retro style */}
-      <div className="pt-2 border-t border-dashed border-gray-400 flex items-center justify-between">
-        <button
-          onClick={() => onSelect(event)}
-          className={`w-full py-2 px-3 text-xs md:text-sm font-bold uppercase transition-transform flex items-center justify-center gap-1 ${
+      {/* Action Buttons: View Single Page & Quick Popup */}
+      <div className="pt-2 border-t border-dashed border-gray-400 flex flex-wrap gap-2">
+        <Link
+          to={`/events/${event.id}`}
+          className={`flex-1 py-2 px-2.5 text-xs font-bold uppercase transition-transform flex items-center justify-center gap-1 ${
             isAltStyle
               ? 'bg-[#d97706] text-white border-2 border-black hover:bg-[#b45309]'
               : 'bg-[#2563eb] text-white border-2 border-black hover:bg-[#1d4ed8]'
-          } shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5`}
+          } shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 text-center`}
         >
-          <span>View Event Details</span>
+          <span>View Event Page</span>
           <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => onSelect(event)}
+          className="bg-white hover:bg-gray-100 text-gray-900 border-2 border-black text-xs font-bold px-2.5 py-2 uppercase shadow-[2px_2px_0px_#000]"
+          title="Open Quick Popup Modal"
+        >
+          Quick Popup
         </button>
       </div>
     </div>

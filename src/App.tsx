@@ -6,9 +6,11 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { TeamPage } from './pages/TeamPage';
 import { EventsPage } from './pages/EventsPage';
+import { EventDetailPage } from './pages/EventDetailPage';
 import { ContactPage } from './pages/ContactPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ChallengeHelper } from './components/ChallengeHelper';
 
 /**
  * ScrollToTop helper ensures that navigation between routes starts at the top of the page.
@@ -38,6 +40,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/team" element={<TeamPage />} />
             <Route path="/events" element={<EventsPage />} />
+            <Route path="/events/:id" element={<EventDetailPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
@@ -46,6 +49,9 @@ export default function App() {
 
         {/* Footer */}
         <Footer />
+
+        {/* Floating Challenge Helper */}
+        <ChallengeHelper />
       </div>
     </BrowserRouter>
   );

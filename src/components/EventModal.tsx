@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { EventItem } from '../types';
 import { X, Calendar, Clock, MapPin, Users, CheckCircle2 } from 'lucide-react';
 
@@ -152,7 +153,14 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-gray-200 px-4 py-2 border-t border-black flex justify-end">
+        <div className="bg-gray-200 px-4 py-2 border-t border-black flex items-center justify-between">
+          <Link
+            to={`/events/${event.id}`}
+            onClick={onClose}
+            className="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 font-bold uppercase border border-black flex items-center gap-1 shadow-[2px_2px_0px_#000]"
+          >
+            <span>Open Dedicated Event Page &gt;&gt;</span>
+          </Link>
           <button
             onClick={onClose}
             className="bg-gray-800 hover:bg-gray-900 text-white text-xs px-4 py-1.5 font-bold uppercase border border-black shadow-[2px_2px_0px_#000]"
